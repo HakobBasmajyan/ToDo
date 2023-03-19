@@ -3,8 +3,10 @@ import ListItem from './ListItem'
 import { DataContext } from './DataProvider'
 
 export default function List( props ) {
+  console.log(props);
   const [todos,setTodos] = useContext(DataContext)
   const {filtered, setFiltered} = props
+  
   const switchComplete = id => {
     const newTodos = [...todos]
     newTodos.forEach((todo,index) => {
@@ -26,13 +28,13 @@ export default function List( props ) {
   }
 
   useEffect(()=>{
-    setFiltered(todos)
-  })
+     setFiltered(todos)
+  },[todos])
 
   return (
         <ul>
-          {
-               filtered.map((todo,index) => (
+          {     
+                filtered?.map((todo,index) => (
                 <ListItem todo={todo} key={index} id={index}
                 checkComplete={switchComplete} handleEditTodos={handleEditTodos} />
               ))

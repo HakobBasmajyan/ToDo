@@ -1,11 +1,11 @@
 import React,{useContext,useState} from 'react'
 import {DataContext} from "./DataProvider"
-import List from './List'
+// import List from './List'
 
 export function Footer() {
   const [checkAll,setCheckAll] = useState(false)
   const [todos,setTodos] = useContext(DataContext)
-  const [filtered,setFiltered] = useState(DataContext)
+  const [filtered,setFiltered] = useState(todos)
 
   const handleCheckAll = () =>{
     const newTodos = [...todos]
@@ -37,14 +37,10 @@ export function Footer() {
 
   return (
       <>
-        <List 
-          filtered={filtered}
-          setFiltered={setFiltered}
-        />
       {todos.length === 0 ? (
-        <h1 className="h1">Nothing To Do!</h1>
+          <h1 className="h1">Nothing To Do!</h1>
         ) : (
-          <div className="container">
+            <div className="container">
           <div className="row">
             <label htmlFor="all">
               <input type="checkbox" name="all" id="all" onChange={handleCheckAll} checked={checkAll}/>
@@ -62,6 +58,11 @@ export function Footer() {
           </div>
         </div>
       )}
+      {/* <List 
+      filtered={filtered}
+      setFiltered={setFiltered}
+      /> */}
+
       </>
   );
 }
