@@ -27,7 +27,7 @@ export default function List() {
     setTodos(newTodos)
   }
   
-  // FOOTER ============================
+  // FILTER COMPONENT ============================
 
   
   const handleCheckAll = () =>{
@@ -58,10 +58,11 @@ export default function List() {
     }
   }
   
+  
   useEffect(()=>{
     setFiltered(todos)
-  },[todos])
-  
+  }, [todos])
+
   return (
     <>
     <ul>
@@ -79,15 +80,15 @@ export default function List() {
               <input type="checkbox" name="all" id="all" onChange={handleCheckAll} checked={checkAll}/>
               ALL
             </label>
-            <p>You Have {todos.length} to do</p>
+            <p>You Have {todos.filter((todo)=> todo.complete === false).length} to do</p>
             <button id="delete" onClick={deleteTodo}>
               Delete
             </button>
           </div>
           <div className="filter">
-            <button className='all' onClick={filterTodo("all")}>All</button>
-            <button className='complete' onClick={filterTodo(true)}>Complete</button>
-            <button className='uncomplete' onClick={filterTodo(false)}>Uncomplete</button>
+            <button className='all' onClick={()=>filterTodo("all")}>All</button>
+            <button className='complete' onClick={()=>filterTodo(true)}>Complete</button>
+            <button className='uncomplete' onClick={()=>filterTodo(false)}>Uncomplete</button>
           </div>
         </div>
 )}
